@@ -7,6 +7,12 @@ Automated video publishing, metadata generation via Gemini AI, comment response,
 - **Comment Replies (`comment-replies.yml`)**: Fetches recent top comments and posts automated replies. Runs daily at 23:30 PKT (18:30 UTC).
 - **Weekly Analytics (`weekly-analytics.yml`)**: Pulls view counts, watch time, and net subscribers via YouTube Analytics API. Runs Sundays at 00:30 PKT (19:30 UTC).
 
+## Live Publication Verification
+- **First Automated Video**: [https://youtu.be/MKKsr8GWXLk](https://youtu.be/MKKsr8GWXLk)
+- **Title**: `Pool Ninja Warrior Course: Can She Beat It?`
+- **Video ID**: `MKKsr8GWXLk`
+- **Initial Verification Run**: [Actions Run 39166217018](https://github.com/vdbdhxhhx-a11y/multipost7/actions/runs/39166217018)
+
 ## Security & Isolation
 - Full isolation for Channel 7 (dedicated GCP project `yt-multipost-channel7`, dedicated GitHub account `vdbdhxhhx-a11y`, isolated Drive folders).
 - Zero plaintext secrets stored in code or repository.
