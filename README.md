@@ -1,4 +1,4 @@
-﻿# multipost7 — YouTube Channel 7 Automation
+# multipost7 � YouTube Channel 7 Automation
 
 Automated video publishing, metadata generation via Gemini AI, comment response, and analytics reporting for **Marie Hutson** (`UCv-WTIg4kaB24NHFlZNsbcA`).
 
@@ -11,8 +11,8 @@ Automated video publishing, metadata generation via Gemini AI, comment response,
 - **First Automated Video**: [https://youtu.be/MKKsr8GWXLk](https://youtu.be/MKKsr8GWXLk)
 - **Title**: `Pool Ninja Warrior Course: Can She Beat It?`
 - **Video ID**: `MKKsr8GWXLk`
-- **Initial Verification Run**: [Actions Run 39166217018](https://github.com/vdbdhxhhx-a11y/multipost7/actions/runs/39166217018)
+- **Initial Verification Run**: [Actions Run 39166217018](https://github.com/saqibaliofficial1995-crypto/multipost7/actions/runs/39166217018)
 
 ## Security & Isolation
-- Full isolation for Channel 7 (dedicated GCP project `yt-multipost-channel7`, dedicated GitHub account `vdbdhxhhx-a11y`, isolated Drive folders).
+- Full isolation for Channel 7 (dedicated GCP project `yt-multipost-channel7`, dedicated GitHub account `saqibaliofficial1995-crypto`, isolated Drive folders).
 - Zero plaintext secrets stored in code or repository.
