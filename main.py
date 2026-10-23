@@ -6,7 +6,7 @@ from src.analytics import run_weekly_analytics
 from src.auth_env import get_access_token, get_gemini_api_key
 
 def main():
-    parser = argparse.ArgumentParser(description="Channel 4 Automation Pipeline")
+    parser = argparse.ArgumentParser(description="Channel 7 Automation Pipeline")
     parser.add_argument("--mode", choices=["upload", "comments", "analytics"], default="upload",
                         help="Mode to run: upload (default), comments, or analytics")
     parser.add_argument("--config", default="config.ci.yaml", help="Path to config file")

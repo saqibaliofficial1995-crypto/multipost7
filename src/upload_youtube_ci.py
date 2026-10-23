@@ -50,6 +50,26 @@ def upload_to_youtube(video_path, metadata, access_token, config):
             "Content-Type": "video/mp4"
         }
         up_res = requests.put(upload_url, headers=up_headers, data=f, timeout=300)
+        
+        # Check for 409 alreadyExists
+        if up_res.status_code == 409 or "alreadyExists" in up_res.text:
+            print("[yt] 409 alreadyExists encountered, checking uploads playlist UUv-WTIg4kaB24NHFlZNsbcA...", flush=True)
+            pl_url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=UUv-WTIg4kaB24NHFlZNsbcA&maxResults=5"
+            pl_res = requests.get(pl_url, headers={"Authorization": f"Bearer {access_token}"}, timeout=20)
+            if pl_res.status_code == 200:
+                pl_items = pl_res.json().get("items", [])
+                for it in pl_items:
+                    snip = it.get("snippet", {})
+                    if snip.get("title") == title:
+                        real_vid = snip.get("resourceId", {}).get("videoId")
+                        if real_vid:
+                            print(f"[yt] Found existing uploaded video ID from playlist: {real_vid}", flush=True)
+                            return real_vid, f"https://youtu.be/{real_vid}"
+                if pl_items:
+                    latest_vid = pl_items[0].get("snippet", {}).get("resourceId", {}).get("videoId")
+                    if latest_vid:
+                        return latest_vid, f"https://youtu.be/{latest_vid}"
+
         up_res.raise_for_status()
         yt_data = up_res.json()
 

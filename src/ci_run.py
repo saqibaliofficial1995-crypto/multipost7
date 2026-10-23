@@ -54,7 +54,7 @@ def get_uploaded_ids(state):
     return uploaded
 
 def execute_pipeline(config_path="config.ci.yaml"):
-    print("[start] Channel 4 Multipost Run starting...", flush=True)
+    print("[start] Channel 7 Multipost Run starting...", flush=True)
     config = load_config(config_path)
     
     is_dry_run = os.environ.get("DRY_RUN", "false").lower() in ["true", "1", "yes"]

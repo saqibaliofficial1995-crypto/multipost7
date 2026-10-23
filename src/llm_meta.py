@@ -170,7 +170,16 @@ def clean_text(raw_text):
 
     return None
 
-def validate_metadata(meta):
+def validate_metadata(meta, allow_topic_fallback=False):
+    topic = (meta.get("inferred_topic") or meta.get("topic") or "").strip()
+    if not topic:
+        if not allow_topic_fallback:
+            raise ValueError("Inferred topic is missing or empty.")
+        else:
+            meta["inferred_topic"] = "General Entertainment"
+            print("[meta] topic fallback used", flush=True)
+    else:
+        meta["inferred_topic"] = topic
     if not isinstance(meta, dict):
         raise ValueError("Metadata is not a valid dictionary.")
 
@@ -181,7 +190,7 @@ def validate_metadata(meta):
         raise ValueError(f"Title length is {len(title)} >= 60 characters.")
 
     # Currency check
-    currency_pattern = re.compile(r"[\$€£¥₹]| (USD|AED|EUR|GBP) ", re.IGNORECASE)
+    currency_pattern = re.compile(r"[\$â‚¬Â£Â¥â‚¹]| (USD|AED|EUR|GBP) ", re.IGNORECASE)
     if currency_pattern.search(title):
         raise ValueError("Title contains currency symbols or currency codes.")
 
@@ -268,6 +277,7 @@ Required JSON structure:
 
     try:
         model_idx = 0
+        topic_retry_done = False
         consecutive_model_failures = 0
 
         while validation_attempts_used < max_validation_attempts:
@@ -355,7 +365,12 @@ Required JSON structure:
                     model_idx += 1
                     continue
 
-                validate_metadata(meta)
+                try:
+                    validate_metadata(meta, allow_topic_fallback=topic_retry_done)
+                except ValueError as ve:
+                    if "Inferred topic is missing or empty" in str(ve):
+                        topic_retry_done = True
+                    raise
                 # Validation passed!
                 meta["path"] = "video_ai_gemini"
                 meta["model_used"] = current_model
