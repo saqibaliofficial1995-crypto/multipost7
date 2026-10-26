@@ -1,4 +1,4 @@
-﻿name: Daily Upload
+name: Daily Upload
 
 on:
   schedule:
@@ -18,7 +18,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: multipost7-upload
+  group: multipost7-pipeline
   cancel-in-progress: false
 
 jobs:
